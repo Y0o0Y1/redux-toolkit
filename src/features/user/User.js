@@ -15,7 +15,11 @@ import { user1, newHobbies, newSkills } from './../../constants/userData';
 const User = () => {
     const dispatch = useDispatch();
     const userName = useSelector((state) => {
-        return state.user?.first_name + " " + state.user?.last_name
+        console.log(state)
+        if (state.user.first_name)
+            return state.user?.first_name + " " + state.user?.last_name
+        else
+            return false
     })
     const skills = useSelector(state => {
         return state.user?.skills
@@ -23,6 +27,7 @@ const User = () => {
     const hobbies = useSelector(state => {
         return state.user?.hobbies
     })
+    console.log(userName)
     return <>
         <hr></hr>
         <button onClick={() => {
@@ -61,17 +66,16 @@ const User = () => {
             }))
         }}>Update identity</button>
         <hr />
-
-        <h2>{userName}</h2>
+        {userName ? <h2>{userName}</h2> : null}
         <h3>User skils</h3>
         <ul>
-            {skills.map(skill => {
+            {skills?.map(skill => {
                 return <li>{skill.name}</li>
             })}
         </ul>
         <h3>User Hobbies</h3>
         <ul>
-            {hobbies.map(hobby => {
+            {hobbies?.map(hobby => {
                 return <li>{hobby.name}</li>
             })}
         </ul>
