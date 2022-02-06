@@ -15,10 +15,8 @@ export const userSlice = createSlice({
         },
         updateLastName: (state, action) => {
             return state = { ...state, "last_name": action.payload }
-
         },
         addHobby: (state, action) => {
-            // return state = { ...state, "last_name": action.payload }
             return { ...state, hobbies: [...state.hobbies, action.payload] }
         },
         updateHobbies: (state, action) => {
@@ -26,7 +24,6 @@ export const userSlice = createSlice({
         },
         addSkill: (state, action) => {
             return { ...state, skills: [...state.skills, action.payload] }
-
         },
         updateSkills: (state, action) => {
             return { ...state, skills: action.payload }

@@ -1,5 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { bindActionCreators } from 'redux'
+
 import {
     fetchProfile,
     updateFirstName,
@@ -8,12 +10,22 @@ import {
     updateHobbies,
     addSkill,
     updateSkills,
-    updateIdentity
+    updateIdentity,
 } from './userSlice';
 import { user1, newHobbies, newSkills } from './../../constants/userData';
 
 const User = () => {
     const dispatch = useDispatch();
+    const actions = bindActionCreators({
+        fetchProfile,
+        updateFirstName,
+        updateLastName,
+        addHobby,
+        updateHobbies,
+        addSkill,
+        updateSkills,
+        updateIdentity,
+    }, dispatch)
     const userName = useSelector((state) => {
         console.log(state)
         if (state.user.first_name)
@@ -31,39 +43,38 @@ const User = () => {
     return <>
         <hr></hr>
         <button onClick={() => {
-            console.log("fetching")
-            dispatch(fetchProfile(user1))
+            actions.fetchProfile(user1)
         }}>Fetch Profile</button>
         <button onClick={() => {
-            dispatch(updateFirstName("Okba"))
+            actions.updateFirstName("Okba")
         }}>
             Update First Name</button>
         <button onClick={() => {
-            dispatch(updateLastName("Cemuz"))
+            actions.updateLastName("Cemuz")
         }}>Update Last Name</button>
         <button onClick={() => {
-            dispatch(addHobby({
+            actions.addHobby({
                 id: 121313,
                 name: "Going To GYM"
-            }))
+            })
         }}>Add Hobby</button>
         <button onClick={() => {
-            dispatch(updateHobbies(newHobbies))
+            actions.updateHobbies(newHobbies)
         }}>Update Hobbies</button>
         <button onClick={() => {
-            dispatch(addSkill({
+            actions.addSkill({
                 id: 121313,
                 name: "AngularJS"
-            }))
+            })
         }}>Add Skill</button>
         <button onClick={() => {
-            dispatch(updateSkills(newSkills))
+            actions.updateSkills(newSkills)
         }}>Update Skills</button>
         <button onClick={() => {
-            dispatch(updateIdentity({
+            actions.updateIdentity({
                 height: "204",
                 speed: "123 mph"
-            }))
+            })
         }}>Update identity</button>
         <hr />
         {userName ? <h2>{userName}</h2> : null}
