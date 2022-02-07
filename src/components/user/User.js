@@ -11,8 +11,8 @@ import {
     addSkill,
     updateSkills,
     updateIdentity,
-} from './userSlice';
-import { user1, newHobbies, newSkills } from './../../constants/userData';
+} from '../../redux/userSlice';
+import { user1, newHobbies, newSkills } from '../../constants/userData';
 
 const User = () => {
     const dispatch = useDispatch();
